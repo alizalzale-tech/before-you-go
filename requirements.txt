@@ -2,3 +2,6 @@ flask>=3.0
 requests>=2.31
 gunicorn>=22.0
 pytest>=8.0
+astral>=3.2
+timezonefinder>=6.5
+tzdata
