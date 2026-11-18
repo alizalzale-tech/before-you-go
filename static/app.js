@@ -108,8 +108,8 @@ function placeTitle(p) {
 }
 
 function showError(message) {
-  $("headline").innerHTML = `<span class="state-msg">Couldn't load the weather.</span>`;
-  $("nowFeels").textContent = `${message} Check your connection and try again.`;
+$("headline").innerHTML = `<span class="state-msg">Couldn't load the weather.</span>`;
+  $("nowFeels").textContent = message;
   const retry = document.createElement("button");
   retry.className = "retry-btn";
   retry.textContent = "Try again";
