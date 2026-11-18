@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Before You Go – weather that tells you what to wear</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2314202b'/><circle cx='26' cy='28' r='10' fill='%23f2c14e'/><path d='M22 46h24a8 8 0 0 0 0-16 11 11 0 0 0-21 3 7 7 0 0 0-3 13z' fill='%23eef3f7'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="sky-cloudy">
+
+  <!-- Sky band: its colour matches the current sky -->
+  <section class="sky" aria-live="polite">
+    <header class="topbar">
+      <a class="brand" href="/">Before You Go</a>
+
+      <div class="search">
+        <label class="visually-hidden" for="searchInput">Search for a city</label>
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="searchInput" type="search" placeholder="Search a city" autocomplete="off"
+               role="combobox" aria-expanded="false" aria-controls="searchResults">
+        <ul id="searchResults" class="search-results" role="listbox" hidden></ul>
+      </div>
+
+      <button type="button" class="ghost-btn" id="locateBtn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+        <span>Use my location</span>
+      </button>
+    </header>
+
+    <nav class="saved" id="savedPlaces" aria-label="Saved places"></nav>
+
+    <div class="hero" id="hero">
+      <div class="place-row">
+        <h1 class="place" id="placeName">Ottawa</h1>
+        <button type="button" class="save-btn" id="saveBtn" aria-pressed="false">Save place</button>
+      </div>
+      <p class="headline" id="headline">Checking the sky…</p>
+
+      <div class="now">
+        <span class="now-icon" id="nowIcon"></span>
+        <span class="now-temp" id="nowTemp">–°</span>
+        <div class="now-text">
+          <span id="nowLabel">&nbsp;</span>
+          <span id="nowFeels">&nbsp;</span>
+        </div>
+        <div class="day-range" id="dayRange"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frost surface: the details -->
+  <main class="frost" id="content">
+
+    <section class="duo">
+      <div class="wear">
+        <h2>What to wear</h2>
+        <p class="subtle" id="wearNote"></p>
+        <ul class="checklist" id="outfitList"></ul>
+        <p class="ready" id="readyNote" hidden>You're ready. Have a good day out there.</p>
+
+        <div class="bring" id="bringBlock">
+          <h3>Also bring</h3>
+          <ul id="extrasList"></ul>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="heads-up">
+          <h2>Heads up</h2>
+          <ul class="alerts" id="alertsList"></ul>
+        </div>
+
+        <div class="best" id="bestBlock">
+          <h2>Best time to be outside</h2>
+          <p class="best-time" id="bestTime"></p>
+          <p class="subtle" id="bestReason"></p>
+        </div>
+
+        <div class="outlook">
+          <h2>Outside today</h2>
+          <div class="meter" aria-hidden="true"><span id="scoreBar"></span></div>
+          <p class="subtle"><strong id="scoreValue">–</strong> out of 100, <span id="scoreLabel"></span></p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="block">
+      <h2>Next 24 hours</h2>
+      <div class="ribbon-wrap" tabindex="0" aria-label="Hourly forecast, scroll sideways">
+        <div class="ribbon" id="ribbon"></div>
+      </div>
+    </section>
+
+    <section class="block week-block">
+      <h2>This week</h2>
+      <ol class="week" id="weekList"></ol>
+    </section>
+
+    <section class="block">
+      <h2>Details</h2>
+      <dl class="details" id="details"></dl>
+    </section>
+  </main>
+
+    <!-- Footer: about the developer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <a href="#" class="back-top" id="backTop">Back to top
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-inner">
+      <div class="footer-cols">
+        <div class="footer-col footer-about">
+          <h2>Ali Zalzale</h2>
+          <p>Web Development student at Algonquin College in Ottawa. I build web apps that solve everyday problems.</p>
+        </div>
+
+        <div class="footer-col">
+          <h2>My projects</h2>
+          <ul>
+            <li><a href="/">Before You Go</a></li>
+            <li><a href="https://alizalzale-tech.github.io/shifttracker/" target="_blank" rel="noopener">ShiftTrack</a></li>
+            <li><a href="https://github.com/alizalzale-tech?tab=repositories" target="_blank" rel="noopener">All projects on GitHub</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2>About this app</h2>
+          <ul>
+            <li><a href="https://github.com/alizalzale-tech/before-you-go" target="_blank" rel="noopener">See the code</a></li>
+            <li><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data: Open-Meteo</a></li>
+            <li><span>Built with Python, Flask, JavaScript and CSS</span></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2>Get in touch</h2>
+          <ul class="contact">
+            <li>
+              <a href="mailto:alizalzale@hotmail.com">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                Email me
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/alizalzale-tech" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>
+                GitHub profile
+              </a>
+            </li>
+            <!-- Add your LinkedIn here when it's ready:
+            <li>
+              <a href="https://linkedin.com/in/YOURNAME" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                LinkedIn
+              </a>
+            </li>
+            -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year">2026</span> Ali Zalzale. All rights reserved.</p>
+        <p>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0).</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
