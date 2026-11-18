@@ -1,6 +1,6 @@
 # Before You Go
 
-![Before You Go screenshot](screenshot.png)
+![Before You Go screenshot](<img width="1902" height="853" alt="Screenshot" src="https://github.com/user-attachments/assets/d43dc5a4-d4a2-4b8a-b095-6b344895e1a6" />)
 
 **Weather that tells you what to wear.** Most weather apps show you numbers. Before You Go turns the forecast into plain advice: what to wear, what to bring, what to watch out for, and the best time to be outside today.
 
