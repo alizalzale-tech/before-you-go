@@ -1,5 +1,7 @@
 # Before You Go
 
+![Before You Go screenshot](screenshot.png)
+
 **Weather that tells you what to wear.** Most weather apps show you numbers. Before You Go turns the forecast into plain advice: what to wear, what to bring, what to watch out for, and the best time to be outside today.
 
 ## Features
